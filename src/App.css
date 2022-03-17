@@ -1,33 +1,92 @@
-@import url("https://fonts.googleapis.com/css2?family=Fredoka&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+:root {
+  --medium-brown: #171212;
+  --dark-brown: #0e0b0b;
+  --green: #1eb854;
+  --yellow: #d99330;
+  --white: #d2cbcb;
+}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 body {
-  font-family: "Fredoka", sans-serif;
+  font-family: "Ubuntu", sans-serif;
   font-size: 1.1rem;
-  letter-spacing: 1px;
+  letter-spacing: 3px;
+  color: var(--dark-brown);
   text-transform: uppercase;
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image: url("./assets/pictures/new_years.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background-attachment: fixed; */
+}
+.loading {
+  font-size: 2rem;
+  font-weight: bold;
 }
 /* timer */
 .timerContainer {
   display: flex;
-  padding: 0px;
-  border: 2px solid steelblue;
+  flex-direction: column;
+  /* border: 2px solid var(--dark-brown); */
+  /* background-color: var(--white); */
+  backdrop-filter: blur(20px);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 30px;
+  padding: 20px;
+  padding-bottom: 40px;
+  /* box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px; */
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.timerTitle {
+  text-align: center;
   padding: 50px;
+}
+.boxesContainer {
+  display: flex;
 }
 .box {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 2px solid salmon;
+  /* border: 2px solid var(--yellow); */
   width: 200px;
   height: 200px;
   margin: 20px;
+  background-color: var(--dark-brown);
+  color: var(--white);
+}
+/* select */
+.selectContainer {
+  text-align: center;
+  margin: 50px;
+}
+.selectTitle {
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+.selectContainer select {
+  cursor: pointer;
+  background-color: var(--yellow);
+  background-color: transparent;
+  /* color: var(--white); */
+  border: none;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  padding: 10px 20px;
+}
+.select {
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 50%;
 }

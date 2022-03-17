@@ -1,9 +1,47 @@
 //components
 import { useEffect, useState } from "react";
 import Box from "./Box";
+//select
+import Select from 'react-select';
+
+const options = [
+    { value: 'new years', label: 'New Years', date: '31st December' },
+    { value: 'christmas', label: 'Christmas', date: '25th December' },
+    { value: 'halloween', label: 'Halloween', date: '31st October' },
+    { value: 'all saints', label: 'All Saints', date: '1st November' },
+    { value: 'epiphany', label: 'Epiphany', date: '6th January' },
+    { value: 'valentines', label: 'Valentines', date: '14th February' },
+    { value: 'st partrick\'s day', label: 'St. Patrick\'s', date: '17th March' },
+
+]
+
+const customStyles = {
+    menu: (provided, state) => ({
+        ...provided,
+        borderBottom: '1px dotted pink',
+        color: state.selectProps.menuColor,
+    }),
+    control: base => ({
+        ...base,
+        border: 0,
+        boxShadow: 'none',
+        cursor: 'pointer'
+    }),
+    singleValue: (provided, state) => {
+        const opacity = state.isDisabled ? 0.5 : 1;
+        const transition = 'opacity 300ms';
+
+        return { ...provided, opacity, transition };
+    }
+}
 
 
-const Timer = () => {
+
+const Timer = ({ isReady, setIsReady, category, setCategory }) => {
+
+    const now = new Date()
+    const currentYear = new Date().getFullYear()
+    const newYears = new Date(`01 Jan ${ currentYear + 1 } 00:00:00 GMT`);
 
     const [months, setMonths] = useState(0)
     const [days, setDays] = useState(0)
@@ -11,25 +49,40 @@ const Timer = () => {
     const [minutes, setMinutes] = useState(0)
     const [seconds, setSeconds] = useState(0)
 
-    const [isCancelled, setIsCancelled] = useState(false)
+    const [date, setDate] = useState(new Date(`01 Jan ${ currentYear } 00:00:00 GMT`))
 
-    const now = new Date()
-    const currentYear = new Date().getFullYear()
-    const newYears = new Date(`01 Jan ${ currentYear + 1 } 00:00:00 GMT`);
 
 
     //MAIN LOGIC
 
     useEffect(() => {
+        console.log(category);
+    }, [category])
 
+    useEffect(() => {
         const myInterval = setInterval(() => {
             calculateTimeDifference()
         }, 1000)
-
+        //cleanup function. clears interval after every load
         return () => clearInterval(myInterval)
-
     }, [seconds])
 
+
+    const validateYear = (date) => {
+        //if the date parameter is less than the now, return a new date with the extra year
+        let newDate
+        if (Date.parse(date) < Date.parse(now)) {
+            newDate = date.setFullYear(currentYear + 1)
+            console.log('date is in the past');
+            console.log(newDate);
+        } else {
+            newDate = Date.parse(date)
+            console.log('date is in the future');
+            console.log(newDate);
+        }
+    }
+
+    //validateYear(new Date('01 Mar 2022 00:00:00 GMT'))
 
 
     const calculateTimeDifference = () => {
@@ -43,58 +96,33 @@ const Timer = () => {
         setMinutes(Math.floor(diff / 1000 / 60) % 60);
         //set seconds left
         setSeconds(Math.floor(diff / 1000) % 60);
+        setIsReady(true)
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /////////////////////////////////////////////////////
-    useEffect(() => {
-        // setInterval(function () {
-        //     getTimeAndDateNow();
-        // }, 1000);
-    }, [])
-
-    const getTimeAndDateNow = () => {
-        let day = new Date().getDate();
-        let month = new Date().getMonth() + 1;
-        let year = new Date().getFullYear();
-        let hour = new Date().getHours();
-        let min = new Date().getMinutes();
-        let sec = new Date().getSeconds();
-
-        // day = day < 10 ? '0' + day : day
-        // month = month < 10 ? '0' + month : month
-        // hour = hour < 10 ? '0' + hour : hour
-        // min = min < 10 ? '0' + min : min
-        // sec = sec < 10 ? '0' + sec : sec
-    };
+    if (!isReady) {
+        return <p className="loading">LOADING....</p>
+    }
 
     return (
         <div className="timerContainer">
-            <Box type={'days'} number={days} />
-            <Box type={'hours'} number={hours} />
-            <Box type={'minutes'} number={minutes} />
-            <Box type={'seconds'} number={seconds} />
+            <h1 className="timerTitle">{category.label ? category.label : 'New Years'} Countdown</h1>
+            <div className="boxesContainer">
+                <Box type={'days'} number={days} />
+                <Box type={'hours'} number={hours} />
+                <Box type={'minutes'} number={minutes} />
+                <Box type={'seconds'} number={seconds} />
+            </div>
+            <Select
+                className="select"
+                options={options}
+                onChange={(option) => setCategory(option)}
+                placeholder={'Change Day...'}
+                styles={customStyles}
+                menuList={'red'}
+                defaultValue={options[0]}
+            />
         </div>
+
     );
 }
 
