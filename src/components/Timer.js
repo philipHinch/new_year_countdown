@@ -4,14 +4,18 @@ import Box from "./Box";
 //select
 import Select from 'react-select';
 
+const now = new Date()
+const currentYear = new Date().getFullYear()
+const gmt = -(now.getTimezoneOffset() / 60).toString()
+
 const options = [
-    { value: 'new years', label: 'New Years', date: '31st December' },
-    { value: 'christmas', label: 'Christmas', date: '25th December' },
-    { value: 'halloween', label: 'Halloween', date: '31st October' },
-    { value: 'all saints', label: 'All Saints', date: '1st November' },
-    { value: 'epiphany', label: 'Epiphany', date: '6th January' },
-    { value: 'valentines', label: 'Valentines', date: '14th February' },
-    { value: 'st partrick\'s day', label: 'St. Patrick\'s', date: '17th March' },
+    { value: 'new years', label: 'New Years', date: `01 Jan ${ currentYear + 1 } 00:00:00 GMT` },
+    { value: 'christmas', label: 'Christmas', date: `25 Dec ${ currentYear } 00:00:00 GMT` },
+    { value: 'halloween', label: 'Halloween', date: `31 Oct ${ currentYear } 00:00:00 GMT` },
+    { value: 'all saints', label: 'All Saints', date: `1 Nov ${ currentYear } 00:00:00 GMT` },
+    { value: 'epiphany', label: 'Epiphany', date: `6 Jan ${ currentYear } 00:00:00 GMT` },
+    { value: 'valentines', label: 'Valentines', date: `14 Feb ${ currentYear } 00:00:00 GMT` },
+    { value: 'st partrick\'s day', label: 'St. Patrick\'s', date: `17 Mar ${ currentYear } 00:00:00 GMT` },
 
 ]
 
@@ -35,8 +39,6 @@ const customStyles = {
     }
 }
 
-
-
 const Timer = ({ isReady, setIsReady, category, setCategory }) => {
 
     const now = new Date()
@@ -49,45 +51,71 @@ const Timer = ({ isReady, setIsReady, category, setCategory }) => {
     const [minutes, setMinutes] = useState(0)
     const [seconds, setSeconds] = useState(0)
 
-    const [date, setDate] = useState(new Date(`01 Jan ${ currentYear } 00:00:00 GMT`))
+    const [title, setTitle] = useState('New Years')
 
+    const [date, setDate] = useState(null)
 
 
     //MAIN LOGIC
 
-    useEffect(() => {
-        console.log(category);
-    }, [category])
+    //receive string date from chosen category
+
+    //compare date to now
+    //convert both date and now to milliseconds, date must be bigger than now
+
+    //call the calculateTimeDifference function
+
+    // useEffect(() => {
+    //     //console.log(options[0].date);
+
+    //     if (isReady) {
+    //         validate(options[0].date)
+    //     }
+
+    // }, [seconds])
+
+
 
     useEffect(() => {
         const myInterval = setInterval(() => {
-            calculateTimeDifference()
+
+            // let newDate = options[1].date
+            calculateTimeDifference(category)
+
         }, 1000)
         //cleanup function. clears interval after every load
         return () => clearInterval(myInterval)
     }, [seconds])
 
 
-    const validateYear = (date) => {
+
+    const validate = (date) => {
+        setTitle(date.label)
         //if the date parameter is less than the now, return a new date with the extra year
-        let newDate
-        if (Date.parse(date) < Date.parse(now)) {
-            newDate = date.setFullYear(currentYear + 1)
-            console.log('date is in the past');
-            console.log(newDate);
+        if (Date.parse(date.date) < Date.parse(now)) {
+            let newDate = new Date(date.date).setFullYear(currentYear + 1)
+            //console.log(new Date(newDate));
+            newDate = new Date(newDate)
+            setCategory(newDate)
+
+            //calculateTimeDifference(newDate)
+
+            //console.log(newDate);
         } else {
-            newDate = Date.parse(date)
-            console.log('date is in the future');
-            console.log(newDate);
+            //newDate = date
+            //console.log(newDate);
+            setCategory(date.date)
+
+            //calculateTimeDifference(date)
+
+            //console.log(newDate);
         }
     }
 
-    //validateYear(new Date('01 Mar 2022 00:00:00 GMT'))
 
-
-    const calculateTimeDifference = () => {
+    const calculateTimeDifference = (d) => {
         //time difference in milliseconds
-        const diff = Date.parse(newYears) - Date.parse(now);
+        const diff = Date.parse(d) - Date.parse(now);
         //set days left
         setDays(Math.floor(diff / 1000 / 60 / 60 / 24));
         //set hours left
@@ -97,7 +125,9 @@ const Timer = ({ isReady, setIsReady, category, setCategory }) => {
         //set seconds left
         setSeconds(Math.floor(diff / 1000) % 60);
         setIsReady(true)
+
     }
+
 
     if (!isReady) {
         return <p className="loading">LOADING....</p>
@@ -105,7 +135,7 @@ const Timer = ({ isReady, setIsReady, category, setCategory }) => {
 
     return (
         <div className="timerContainer">
-            <h1 className="timerTitle">{category.label ? category.label : 'New Years'} Countdown</h1>
+            <h1 className="timerTitle">{title} Countdown</h1>
             <div className="boxesContainer">
                 <Box type={'days'} number={days} />
                 <Box type={'hours'} number={hours} />
@@ -115,10 +145,9 @@ const Timer = ({ isReady, setIsReady, category, setCategory }) => {
             <Select
                 className="select"
                 options={options}
-                onChange={(option) => setCategory(option)}
+                onChange={(option) => validate(option)}
                 placeholder={'Change Day...'}
                 styles={customStyles}
-                menuList={'red'}
                 defaultValue={options[0]}
             />
         </div>
