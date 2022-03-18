@@ -14,10 +14,12 @@ function App() {
 
   const [isReady, setIsReady] = useState(false)
   const [category, setCategory] = useState(newYears)
+  const [background, setBackground] = useState('newYears')
 
   return (
-    <div className="App">
-      <Timer isReady={isReady} setIsReady={setIsReady} category={category} setCategory={setCategory} />
+    <div className='App'>
+      <div className={`backgroundContainer ${ background }`}></div>
+      <Timer isReady={isReady} setIsReady={setIsReady} category={category} setCategory={setCategory} setBackground={setBackground} />
     </div>
   );
 }

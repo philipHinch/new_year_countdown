@@ -9,13 +9,13 @@ const currentYear = new Date().getFullYear()
 const gmt = -(now.getTimezoneOffset() / 60).toString()
 
 const options = [
-    { value: 'new years', label: 'New Years', date: `01 Jan ${ currentYear + 1 } 00:00:00 GMT` },
+    { value: 'newYears', label: 'New Years', date: `01 Jan ${ currentYear + 1 } 00:00:00 GMT` },
     { value: 'christmas', label: 'Christmas', date: `25 Dec ${ currentYear } 00:00:00 GMT` },
     { value: 'halloween', label: 'Halloween', date: `31 Oct ${ currentYear } 00:00:00 GMT` },
-    { value: 'all saints', label: 'All Saints', date: `1 Nov ${ currentYear } 00:00:00 GMT` },
-    { value: 'epiphany', label: 'Epiphany', date: `6 Jan ${ currentYear } 00:00:00 GMT` },
+    { value: 'allSaints', label: 'All Saints', date: `01 Nov ${ currentYear } 00:00:00 GMT` },
     { value: 'valentines', label: 'Valentines', date: `14 Feb ${ currentYear } 00:00:00 GMT` },
-    { value: 'st partrick\'s day', label: 'St. Patrick\'s', date: `17 Mar ${ currentYear } 00:00:00 GMT` },
+    { value: 'stPartricks', label: 'St. Patrick\'s', date: `17 Mar ${ currentYear } 00:00:00 GMT` },
+    { value: 'epiphany', label: 'Epiphany', date: `06 Jan ${ currentYear } 00:00:00 GMT` }
 
 ]
 
@@ -39,21 +39,18 @@ const customStyles = {
     }
 }
 
-const Timer = ({ isReady, setIsReady, category, setCategory }) => {
+const Timer = ({ isReady, setIsReady, category, setCategory, setBackground }) => {
 
     const now = new Date()
     const currentYear = new Date().getFullYear()
     const newYears = new Date(`01 Jan ${ currentYear + 1 } 00:00:00 GMT`);
 
-    const [months, setMonths] = useState(0)
     const [days, setDays] = useState(0)
     const [hours, setHours] = useState(0)
     const [minutes, setMinutes] = useState(0)
     const [seconds, setSeconds] = useState(0)
 
     const [title, setTitle] = useState('New Years')
-
-    const [date, setDate] = useState(null)
 
 
     //MAIN LOGIC
@@ -88,9 +85,9 @@ const Timer = ({ isReady, setIsReady, category, setCategory }) => {
     }, [seconds])
 
 
-
     const validate = (date) => {
         setTitle(date.label)
+        setBackground(date.value)
         //if the date parameter is less than the now, return a new date with the extra year
         if (Date.parse(date.date) < Date.parse(now)) {
             let newDate = new Date(date.date).setFullYear(currentYear + 1)
@@ -129,6 +126,7 @@ const Timer = ({ isReady, setIsReady, category, setCategory }) => {
     }
 
 
+
     if (!isReady) {
         return <p className="loading">LOADING....</p>
     }
@@ -136,6 +134,7 @@ const Timer = ({ isReady, setIsReady, category, setCategory }) => {
     return (
         <div className="timerContainer">
             <h1 className="timerTitle">{title} Countdown</h1>
+            {/* <h3 className="timerDate">{category.substr(0, 11)}</h3> */}
             <div className="boxesContainer">
                 <Box type={'days'} number={days} />
                 <Box type={'hours'} number={hours} />
