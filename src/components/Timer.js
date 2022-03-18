@@ -1,5 +1,6 @@
-//components
+//hooks
 import { useEffect, useState } from "react";
+//components
 import Box from "./Box";
 //select
 import Select from 'react-select';
@@ -43,7 +44,7 @@ const Timer = ({ isReady, setIsReady, category, setCategory, setBackground }) =>
 
     const now = new Date()
     const currentYear = new Date().getFullYear()
-    const newYears = new Date(`01 Jan ${ currentYear + 1 } 00:00:00 GMT`);
+    //const newYears = new Date(`01 Jan ${ currentYear + 1 } 00:00:00 GMT`);
 
     const [days, setDays] = useState(0)
     const [hours, setHours] = useState(0)
@@ -51,39 +52,36 @@ const Timer = ({ isReady, setIsReady, category, setCategory, setBackground }) =>
     const [seconds, setSeconds] = useState(0)
 
     const [title, setTitle] = useState('New Years')
+    const [date, setDate] = useState('31st December')
 
 
     //MAIN LOGIC
 
-    //receive string date from chosen category
-
-    //compare date to now
-    //convert both date and now to milliseconds, date must be bigger than now
-
-    //call the calculateTimeDifference function
-
-    // useEffect(() => {
-    //     //console.log(options[0].date);
-
-    //     if (isReady) {
-    //         validate(options[0].date)
-    //     }
-
-    // }, [seconds])
-
-
+    useEffect(() => {
+        if (title === 'New Years') {
+            setDate('31 December')
+        } else if (title === 'Christmas') {
+            setDate('25 December')
+        } else if (title === 'Halloween') {
+            setDate('31 October')
+        } else if (title === 'All Saints') {
+            setDate('1 November')
+        } else if (title === 'Valentines') {
+            setDate('14 February')
+        } else if (title === 'St. Patrick\'s') {
+            setDate('17 March')
+        } else if (title === 'Epiphany') {
+            setDate('6 January')
+        }
+    }, [title])
 
     useEffect(() => {
         const myInterval = setInterval(() => {
-
-            // let newDate = options[1].date
             calculateTimeDifference(category)
-
         }, 1000)
         //cleanup function. clears interval after every load
         return () => clearInterval(myInterval)
     }, [seconds])
-
 
     const validate = (date) => {
         setTitle(date.label)
@@ -91,24 +89,13 @@ const Timer = ({ isReady, setIsReady, category, setCategory, setBackground }) =>
         //if the date parameter is less than the now, return a new date with the extra year
         if (Date.parse(date.date) < Date.parse(now)) {
             let newDate = new Date(date.date).setFullYear(currentYear + 1)
-            //console.log(new Date(newDate));
             newDate = new Date(newDate)
             setCategory(newDate)
-
-            //calculateTimeDifference(newDate)
-
-            //console.log(newDate);
+                ;
         } else {
-            //newDate = date
-            //console.log(newDate);
             setCategory(date.date)
-
-            //calculateTimeDifference(date)
-
-            //console.log(newDate);
         }
     }
-
 
     const calculateTimeDifference = (d) => {
         //time difference in milliseconds
@@ -122,10 +109,7 @@ const Timer = ({ isReady, setIsReady, category, setCategory, setBackground }) =>
         //set seconds left
         setSeconds(Math.floor(diff / 1000) % 60);
         setIsReady(true)
-
     }
-
-
 
     if (!isReady) {
         return <p className="loading">LOADING....</p>
@@ -134,7 +118,7 @@ const Timer = ({ isReady, setIsReady, category, setCategory, setBackground }) =>
     return (
         <div className="timerContainer">
             <h1 className="timerTitle">{title} Countdown</h1>
-            {/* <h3 className="timerDate">{category.substr(0, 11)}</h3> */}
+            <p className="timerDate">{date}</p>
             <div className="boxesContainer">
                 <Box type={'days'} number={days} />
                 <Box type={'hours'} number={hours} />
@@ -150,7 +134,6 @@ const Timer = ({ isReady, setIsReady, category, setCategory, setBackground }) =>
                 defaultValue={options[0]}
             />
         </div>
-
     );
 }
 

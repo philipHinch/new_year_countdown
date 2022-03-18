@@ -29,15 +29,6 @@ body {
   text-transform: uppercase;
   min-height: 100vh;
   background-color: var(--dark-brown);
-  overflow: hidden;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
-  /* min-height: 100vh;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed; */
 }
 .loading {
   font-size: 2rem;
@@ -60,15 +51,12 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  /* border: 2px solid var(--dark-brown); */
-  /* background-color: var(--white); */
   backdrop-filter: blur(20px);
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 30px;
   padding: 20px;
   padding-bottom: 40px;
   z-index: 2;
-  /* box-shadow: rgba(0, 0, 0, 0.4) 0px 30px 90px; */
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
     rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -82,10 +70,13 @@ body {
   letter-spacing: 1px;
   opacity: 0.8;
 }
-
 .timerTitle {
   text-align: center;
   padding: 50px;
+}
+.timerDate {
+  text-align: center;
+  margin-bottom: 10px;
 }
 .boxesContainer {
   display: flex;
@@ -95,7 +86,6 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* border: 2px solid var(--yellow); */
   width: 200px;
   height: 200px;
   margin: 20px;
@@ -115,7 +105,6 @@ body {
   cursor: pointer;
   background-color: var(--yellow);
   background-color: transparent;
-  /* color: var(--white); */
   border: none;
   font-size: 1.1rem;
   text-transform: uppercase;
@@ -174,7 +163,6 @@ body {
   animation: fadeIn 1s ease;
   transition: all 1s ease;
 }
-
 /* animations */
 @keyframes fadeIn {
   0% {
@@ -182,5 +170,40 @@ body {
   }
   100% {
     opacity: 1;
+  }
+}
+/* media queries */
+@media (max-width: 1000px) {
+  .timerContainer {
+    margin-top: 50px;
+  }
+  .boxesContainer {
+    align-items: center;
+    flex-direction: column;
+  }
+  .box {
+    margin: 10px;
+  }
+}
+@media (max-width: 600px) {
+  .timerTitle {
+    font-size: 1.4rem;
+  }
+  .timerContainer {
+    margin: 10px;
+    margin-top: 20px;
+  }
+}
+@media (max-width: 500px) {
+  .timerContainer {
+    margin-top: 0;
+  }
+  .box {
+    height: 150px;
+    width: 150px;
+  }
+  .select {
+    width: 90%;
+    font-size: 0.9rem;
   }
 }
