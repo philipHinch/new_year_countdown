@@ -35,6 +35,8 @@ npm start
 
 ![This is an image](https://raw.githubusercontent.com/philipHinch/underline/main/underline.png)
 
+Some previews:
+
 ![This is an image](https://raw.githubusercontent.com/philipHinch/new_years_countdown/main/src/assets/previews/countdownpreview1.png)
 
 ---
