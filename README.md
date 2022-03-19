@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# Date Countdown
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Want to know how many days untill Christmas? This app will countdown to your selected date and tell you how long to wait untill your favourite holiday.
 
-## Available Scripts
+Select from the dropdown list your date and check out how many days, hours, minutes and seconds untill that day.
 
-In the project directory, you can run:
+This is a simple but tricky app because the date object in JavaScript can be a little tedious to deal with in certain occasions. For example, some dates here are in the past so I had to parse them and add an extra year to the dates. Also date variables had to be converted into milliseconds passed from January 1, 1970 UTC in order to compare one to another.
 
-### `npm start`
+[View Project](https://date-countdown-xi.vercel.app/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![This is an image](https://raw.githubusercontent.com/philipHinch/underline/main/underline.png)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Install Dependencies
 
-### `npm test`
+```
+npm install
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Run
 
-### `npm run build`
+```
+npm start
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![This is an image](https://raw.githubusercontent.com/philipHinch/underline/main/underline.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Technologies used:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- REACT.JS
+- REACT FUNCTIONAL COMPONENTS
+- REACT HOOKS 
+- DATE OBJECT
+- CSS ANIMATIONS
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+![This is an image](https://raw.githubusercontent.com/philipHinch/underline/main/underline.png)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![This is an image](https://raw.githubusercontent.com/philipHinch/new_years_countdown/main/src/assets/previews/countdownpreview1.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![This is an image](https://raw.githubusercontent.com/philipHinch/new_years_countdown/main/src/assets/previews/countdownpreview2.png)
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![This is an image](https://raw.githubusercontent.com/philipHinch/new_years_countdown/main/src/assets/previews/countdownpreview3.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+[View Project](https://date-countdown-xi.vercel.app/)
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
