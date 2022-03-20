@@ -1,8 +1,8 @@
 # Date Countdown
 
-Want to know how many days untill Christmas? This app will countdown to your selected date and tell you how long to wait untill your favourite holiday.
+Want to know how many days until Christmas? This app will countdown to your selected date and tell you how long to wait untill your favourite holiday.
 
-Select from the dropdown list your date and check out how many days, hours, minutes and seconds untill that day.
+Select from the dropdown list your date and check out how many days, hours, minutes and seconds until that day.
 
 This is a simple but tricky app because the date object in JavaScript can be a little tedious to deal with in certain occasions. For example, some dates here are in the past so I had to parse them and add an extra year to the dates. Also date variables had to be converted into milliseconds passed from January 1, 1970 UTC in order to compare one to another.
 
@@ -41,11 +41,7 @@ Previews:
 
 ![This is an image](https://raw.githubusercontent.com/philipHinch/new_years_countdown/main/src/assets/previews/countdownpreview1.png)
 
----
-
 ![This is an image](https://raw.githubusercontent.com/philipHinch/new_years_countdown/main/src/assets/previews/countdownpreview2.png)
-
----
 
 ![This is an image](https://raw.githubusercontent.com/philipHinch/new_years_countdown/main/src/assets/previews/countdownpreview3.png)
 
